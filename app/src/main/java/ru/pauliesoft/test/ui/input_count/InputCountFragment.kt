@@ -4,20 +4,43 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ru.pauliesoft.test.databinding.FragmentInputCountBinding
+import ru.pauliesoft.test.navigateWithAnimation
+import ru.pauliesoft.test.ui.base.BaseFragment
+import ru.pauliesoft.test.ui.livedata_wrapper.EventObserver
 
-class InputCountFragment : Fragment() {
+class InputCountFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentInputCountBinding
+    override lateinit var binding: FragmentInputCountBinding
+    override val viewModel: InputCountViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         binding = FragmentInputCountBinding.inflate(inflater, container, false)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+    override fun setupViews() {
+        binding.countEditText.addTextChangedListener { editable ->
+            editable?.toString()?.toIntOrNull()?.let {
+                viewModel.onCountChanged(it)
+            }
+        }
 
+        binding.goButton.setOnClickListener {
+            viewModel.onGoButtonClicked()
+        }
+    }
+
+    override fun setupObservers() {
+        viewModel.navigateToGraphScreen.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigateWithAnimation(
+                InputCountFragmentDirections.actionInputCountFragmentToGraphFragment()
+            )
+        })
+    }
 }

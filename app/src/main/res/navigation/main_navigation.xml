@@ -9,5 +9,14 @@
         android:id="@+id/inputCountFragment"
         android:name="ru.pauliesoft.test.ui.input_count.InputCountFragment"
         android:label="fragment_input_count"
-        tools:layout="@layout/fragment_input_count" />
+        tools:layout="@layout/fragment_input_count">
+        <action
+            android:id="@+id/action_inputCountFragment_to_graphFragment"
+            app:destination="@id/graphFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="ru.pauliesoft.test.ui.graph.GraphFragment"
+        android:label="fragment_graph"
+        tools:layout="@layout/fragment_graph" />
 </navigation>
