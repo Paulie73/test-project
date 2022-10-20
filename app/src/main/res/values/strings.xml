@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Test</string>
+    <string name="app_name">PointsGraph</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="table">Таблица</string>
     <string name="graph">График</string>
@@ -10,4 +10,6 @@
     <string name="types_of_graph">Отображение графика</string>
     <string name="enter_number_of_points">Введите количество точек</string>
     <string name="go_button">Поехали</string>
+    <string name="save_to_file_button">Сохранить</string>
+    <string name="file_saved">Файл сохранен</string>
 </resources>

@@ -38,6 +38,14 @@
 
     </RadioGroup>
 
+    <Button
+        android:id="@+id/saveToFileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/save_to_file_button"
+        android:textAllCaps="false" />
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
