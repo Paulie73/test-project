@@ -21,6 +21,8 @@ class MainViewModel @Inject constructor(
     private val _navigateToGraphScreen = MutableLiveData<Event<Unit>>()
     val navigateToGraphScreen: LiveData<Event<Unit>> = _navigateToGraphScreen
 
+    val isGraphSmooth = MutableLiveData(false)
+
     var numberTabSelected = 0
 
     var count = 0

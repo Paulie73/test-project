@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.pauliesoft.test.databinding.FragmentGraphBinding
 import ru.pauliesoft.test.ui.MainViewModel
 import ru.pauliesoft.test.ui.base.BaseFragment
+import ru.pauliesoft.test.ui.mappers.Point
 
 @AndroidEntryPoint
 class GraphFragment : BaseFragment() {
@@ -27,17 +28,35 @@ class GraphFragment : BaseFragment() {
     }
 
     override fun setupViews() {
-
+        binding.radioButtonStraight.setOnClickListener { viewModel.isGraphSmooth.postValue(false) }
+        binding.radioButtonSmooth.setOnClickListener { viewModel.isGraphSmooth.postValue(true) }
     }
 
     override fun setupObservers() {
         viewModel.points.observe(viewLifecycleOwner) {
-            val entryList = it.map { point -> Entry(point.x.toFloat(), point.y.toFloat()) }
+            drawGraph(it)
+        }
 
+        viewModel.isGraphSmooth.observe(viewLifecycleOwner) {
             with(binding) {
-                lineChart.data = LineData(LineDataSet(entryList, ""))
-                lineChart.invalidate()
+                radioButtonSmooth.isChecked = it
+                radioButtonStraight.isChecked = !it
             }
+
+            viewModel.points.value?.let { drawGraph(it) }
+        }
+    }
+
+    private fun drawGraph(points: List<Point>) {
+        val entryList = points.map { point -> Entry(point.x.toFloat(), point.y.toFloat()) }
+
+        with(binding) {
+            lineChart.data = LineData(LineDataSet(entryList, "").apply {
+                if (viewModel.isGraphSmooth.value == true) {
+                    mode = LineDataSet.Mode.CUBIC_BEZIER
+                }
+            })
+            lineChart.invalidate()
         }
     }
 }

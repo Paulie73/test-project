@@ -1,5 +1,6 @@
 package ru.pauliesoft.test.ui.result.tabs
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -59,11 +60,13 @@ class TableFragment : BaseFragment() {
         }
         tableRow.addView(TextView(context).apply {
             text = firstValue
+            setTextColor(Color.BLACK)
             setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
             gravity = Gravity.CENTER_HORIZONTAL
         })
         tableRow.addView(TextView(context).apply {
             text = secondValue
+            setTextColor(Color.BLACK)
             setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
             gravity = Gravity.CENTER_HORIZONTAL
         })

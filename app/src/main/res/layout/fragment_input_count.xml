@@ -3,25 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/near_white"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".ui.input_count.InputCountFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Введите количество точек"
-        android:textColor="@color/black" />
+        android:text="@string/enter_number_of_points"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/countEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number" />
+        android:layout_margin="32dp"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:theme="@style/EditText" />
 
     <Button
         android:id="@+id/goButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Поехали" />
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="32dp"
+        android:text="@string/go_button" />
 
 </LinearLayout>
