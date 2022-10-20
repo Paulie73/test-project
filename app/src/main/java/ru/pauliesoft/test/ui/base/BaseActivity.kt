@@ -39,6 +39,10 @@ abstract class BaseActivity : AppCompatActivity() {
         viewModel.showSnackBar.observe(this, EventObserver {
             showSnackBar(binding.root, it)
         })
+
+        viewModel.showSnackBarFromRes.observe(this, EventObserver {
+            showSnackBar(binding.root, getString(it))
+        })
     }
 
     private fun setupLoaderObserver() {

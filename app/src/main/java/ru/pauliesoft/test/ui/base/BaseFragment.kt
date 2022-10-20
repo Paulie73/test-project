@@ -16,9 +16,7 @@ abstract class BaseFragment : Fragment() {
     protected abstract val viewModel: BaseViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         setupSnackBarObserver()
         setupLoaderObserver()
@@ -34,6 +32,12 @@ abstract class BaseFragment : Fragment() {
         viewModel.showSnackBar.observe(viewLifecycleOwner, EventObserver {
             (activity as? BaseActivity)?.let { baseActivity ->
                 showSnackBar(baseActivity.binding.root, it)
+            }
+        })
+
+        viewModel.showSnackBarFromRes.observe(viewLifecycleOwner, EventObserver {
+            (activity as? BaseActivity)?.let { baseActivity ->
+                showSnackBar(baseActivity.binding.root, getString(it))
             }
         })
     }

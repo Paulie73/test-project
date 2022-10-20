@@ -2,4 +2,8 @@
     <string name="app_name">Test</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="table">Таблица</string>
+    <string name="graph">График</string>
+    <string name="enter_number">Введите положительное целое число</string>
+    <string name="enter_positive_number">Введите положительное число</string>
 </resources>

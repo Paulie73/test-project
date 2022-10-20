@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ru.pauliesoft.test.databinding.FragmentInputCountBinding
 import ru.pauliesoft.test.navigateWithAnimation
+import ru.pauliesoft.test.ui.MainViewModel
 import ru.pauliesoft.test.ui.base.BaseFragment
 import ru.pauliesoft.test.ui.livedata_wrapper.EventObserver
 
 class InputCountFragment : BaseFragment() {
 
     override lateinit var binding: FragmentInputCountBinding
-    override val viewModel: InputCountViewModel by viewModels()
+    override val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -39,7 +40,7 @@ class InputCountFragment : BaseFragment() {
     override fun setupObservers() {
         viewModel.navigateToGraphScreen.observe(viewLifecycleOwner, EventObserver {
             findNavController().navigateWithAnimation(
-                InputCountFragmentDirections.actionInputCountFragmentToGraphFragment()
+                InputCountFragmentDirections.actionInputCountFragmentToGraphFragment(it)
             )
         })
     }
