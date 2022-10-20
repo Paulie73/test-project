@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ru.pauliesoft.test.databinding.FragmentInputCountBinding
+import ru.pauliesoft.test.hideKeyboard
 import ru.pauliesoft.test.navigateWithAnimation
 import ru.pauliesoft.test.ui.MainViewModel
 import ru.pauliesoft.test.ui.base.BaseFragment
@@ -33,6 +34,7 @@ class InputCountFragment : BaseFragment() {
         }
 
         binding.goButton.setOnClickListener {
+            it.hideKeyboard()
             viewModel.onGoButtonClicked()
         }
     }
@@ -40,7 +42,7 @@ class InputCountFragment : BaseFragment() {
     override fun setupObservers() {
         viewModel.navigateToGraphScreen.observe(viewLifecycleOwner, EventObserver {
             findNavController().navigateWithAnimation(
-                InputCountFragmentDirections.actionInputCountFragmentToGraphFragment(it)
+                InputCountFragmentDirections.actionInputCountFragmentToGraphFragment()
             )
         })
     }

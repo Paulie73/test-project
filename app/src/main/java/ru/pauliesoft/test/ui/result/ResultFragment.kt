@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import ru.pauliesoft.test.R
@@ -20,7 +19,6 @@ class ResultFragment : BaseFragment() {
 
     override lateinit var binding: FragmentResultBinding
     override val viewModel: MainViewModel by activityViewModels()
-    private val args by navArgs<ResultFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -53,11 +51,14 @@ class ResultFragment : BaseFragment() {
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     viewPager.currentItem = tab.position
+                    viewModel.numberTabSelected = tab.position
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
             })
+
+            tabLayout.selectTab(tabLayout.getTabAt(viewModel.numberTabSelected))
         }
     }
 

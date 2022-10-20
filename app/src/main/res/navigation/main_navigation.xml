@@ -18,9 +18,5 @@
         android:id="@+id/resultFragment"
         android:name="ru.pauliesoft.test.ui.result.ResultFragment"
         android:label="fragment_graph"
-        tools:layout="@layout/fragment_result">
-        <argument
-            android:name="count"
-            app:argType="integer" />
-    </fragment>
+        tools:layout="@layout/fragment_result" />
 </navigation>

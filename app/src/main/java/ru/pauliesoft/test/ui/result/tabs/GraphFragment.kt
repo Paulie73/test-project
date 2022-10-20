@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import ru.pauliesoft.test.databinding.FragmentGraphBinding
 import ru.pauliesoft.test.ui.MainViewModel
 import ru.pauliesoft.test.ui.base.BaseFragment
@@ -27,7 +30,12 @@ class GraphFragment : BaseFragment() {
 
     override fun setupObservers() {
         viewModel.points.observe(viewLifecycleOwner) {
+            val entryList = it.map { point -> Entry(point.x.toFloat(), point.y.toFloat()) }
 
+            with(binding) {
+                lineChart.data = LineData(LineDataSet(entryList, ""))
+                lineChart.invalidate()
+            }
         }
     }
 }

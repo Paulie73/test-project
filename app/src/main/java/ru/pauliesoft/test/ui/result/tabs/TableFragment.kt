@@ -18,6 +18,12 @@ class TableFragment : BaseFragment() {
     override lateinit var binding: FragmentTableBinding
     override val viewModel: MainViewModel by activityViewModels()
 
+    companion object {
+        private const val DEFAULT_PADDING = 20
+        private const val X_NAME = "Координата X"
+        private const val Y_NAME = "Координата Y"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -36,7 +42,7 @@ class TableFragment : BaseFragment() {
     }
 
     private fun drawTable(points: List<Point>) {
-        binding.tableLayout.addView(createTableRow("X", "Y"))
+        binding.tableLayout.addView(createTableRow(X_NAME, Y_NAME))
         for (point in points) {
             binding.tableLayout.addView(createTableRow(point.x.toString(), point.y.toString()))
         }
@@ -51,12 +57,12 @@ class TableFragment : BaseFragment() {
         }
         tableRow.addView(TextView(context).apply {
             text = firstValue
-            setPadding(20, 20, 20, 20)
+            setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
             gravity = Gravity.CENTER_HORIZONTAL
         })
         tableRow.addView(TextView(context).apply {
             text = secondValue
-            setPadding(20, 20, 20, 20)
+            setPadding(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING)
             gravity = Gravity.CENTER_HORIZONTAL
         })
         return tableRow
