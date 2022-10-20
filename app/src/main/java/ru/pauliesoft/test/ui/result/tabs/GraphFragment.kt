@@ -8,10 +8,12 @@ import androidx.fragment.app.activityViewModels
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import dagger.hilt.android.AndroidEntryPoint
 import ru.pauliesoft.test.databinding.FragmentGraphBinding
 import ru.pauliesoft.test.ui.MainViewModel
 import ru.pauliesoft.test.ui.base.BaseFragment
 
+@AndroidEntryPoint
 class GraphFragment : BaseFragment() {
 
     override lateinit var binding: FragmentGraphBinding

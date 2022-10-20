@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import ru.pauliesoft.test.databinding.FragmentInputCountBinding
 import ru.pauliesoft.test.hideKeyboard
 import ru.pauliesoft.test.navigateWithAnimation
@@ -14,6 +15,7 @@ import ru.pauliesoft.test.ui.MainViewModel
 import ru.pauliesoft.test.ui.base.BaseFragment
 import ru.pauliesoft.test.ui.livedata_wrapper.EventObserver
 
+@AndroidEntryPoint
 class InputCountFragment : BaseFragment() {
 
     override lateinit var binding: FragmentInputCountBinding

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 import ru.pauliesoft.test.R
 import ru.pauliesoft.test.databinding.FragmentResultBinding
 import ru.pauliesoft.test.ui.MainViewModel
@@ -15,6 +16,7 @@ import ru.pauliesoft.test.ui.base.BaseFragment
 import ru.pauliesoft.test.ui.result.tabs.GraphFragment
 import ru.pauliesoft.test.ui.result.tabs.TableFragment
 
+@AndroidEntryPoint
 class ResultFragment : BaseFragment() {
 
     override lateinit var binding: FragmentResultBinding

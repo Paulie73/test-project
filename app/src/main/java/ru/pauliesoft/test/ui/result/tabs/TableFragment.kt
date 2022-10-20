@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import dagger.hilt.android.AndroidEntryPoint
 import ru.pauliesoft.test.databinding.FragmentTableBinding
 import ru.pauliesoft.test.ui.MainViewModel
 import ru.pauliesoft.test.ui.base.BaseFragment
 import ru.pauliesoft.test.ui.mappers.Point
 
+@AndroidEntryPoint
 class TableFragment : BaseFragment() {
 
     override lateinit var binding: FragmentTableBinding

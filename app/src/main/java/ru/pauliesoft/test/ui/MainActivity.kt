@@ -2,9 +2,11 @@ package ru.pauliesoft.test.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import ru.pauliesoft.test.databinding.ActivityMainBinding
 import ru.pauliesoft.test.ui.base.BaseActivity
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     override lateinit var binding: ActivityMainBinding

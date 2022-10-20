@@ -1,10 +1,11 @@
 package ru.pauliesoft.test.ui.mappers
 
+import ru.pauliesoft.test.data.PointsResponse
+
 data class Point(
-    val x: Double,
-    val y: Double
+    val x: Double, val y: Double
 )
 
-fun Any.toPointList(): List<Point> {
-    return listOf()
+fun PointsResponse.toPointList(): List<Point> {
+    return points.map { Point(it.x, it.y) }
 }

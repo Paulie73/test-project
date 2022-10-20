@@ -3,15 +3,20 @@ package ru.pauliesoft.test.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.pauliesoft.test.R
+import ru.pauliesoft.test.domain.GetPointsInteractor
 import ru.pauliesoft.test.ui.base.BaseViewModel
 import ru.pauliesoft.test.ui.livedata_wrapper.Event
 import ru.pauliesoft.test.ui.mappers.Point
-import kotlin.random.Random
+import ru.pauliesoft.test.ui.mappers.toPointList
+import javax.inject.Inject
 
-class MainViewModel : BaseViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val getPointsInteractor: GetPointsInteractor
+) : BaseViewModel() {
 
     private val _navigateToGraphScreen = MutableLiveData<Event<Unit>>()
     val navigateToGraphScreen: LiveData<Event<Unit>> = _navigateToGraphScreen
@@ -27,22 +32,16 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun onGoButtonClicked() {
-        viewModelScope.launch {
+        viewModelScope.launch(exceptionHandler) {
             when {
                 count == 0 -> showSnackBar(R.string.enter_number)
                 count < 0 -> showSnackBar(R.string.enter_positive_number)
                 else -> {
                     showLoader(true)
-                    delay(1000)
-                    points.postValue(
-                        listOf(
-                            Point(Random.nextDouble(), Random.nextDouble()),
-                            Point(Random.nextDouble(), Random.nextDouble()),
-                            Point(Random.nextDouble(), Random.nextDouble()),
-                            Point(Random.nextDouble(), Random.nextDouble()),
-                            Point(Random.nextDouble(), Random.nextDouble())
-                        ).sortedBy { point -> point.x }
-                    )
+                    val pointList = getPointsInteractor.getPoints(count)
+                        .toPointList()
+                        .sortedBy { point -> point.x }
+                    points.postValue(pointList)
                     _navigateToGraphScreen.postValue(Event(Unit))
                     showLoader(false)
                 }
