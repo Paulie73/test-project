@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import ru.pauliesoft.test.Const.BASE_URL
-import ru.pauliesoft.test.data.RetrofitAPI
+import ru.pauliesoft.test.data.CoordinatesAPI
 import java.util.concurrent.TimeUnit
 
 @Module
@@ -44,9 +44,9 @@ class RestAPIModule {
     }
 
     @Provides
-    fun provideRetrofitAPI(
+    fun provideCoordinatesAPI(
         retrofit: Retrofit
-    ): RetrofitAPI {
-        return retrofit.create(RetrofitAPI::class.java)
+    ): CoordinatesAPI {
+        return retrofit.create(CoordinatesAPI::class.java)
     }
 }

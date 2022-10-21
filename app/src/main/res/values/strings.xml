@@ -12,4 +12,7 @@
     <string name="go_button">Поехали</string>
     <string name="save_to_file_button">Сохранить</string>
     <string name="file_saved">Файл сохранен</string>
+    <string name="exception_description">Произошла ошибка, повторите запрос позже</string>
+    <string name="x_axis">Координата X</string>
+    <string name="y_axis">Координата Y</string>
 </resources>

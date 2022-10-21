@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.pauliesoft.test.R
 import ru.pauliesoft.test.domain.GetPointsInteractor
 import ru.pauliesoft.test.ui.base.BaseViewModel
@@ -35,17 +37,19 @@ class MainViewModel @Inject constructor(
 
     fun onGoButtonClicked() {
         viewModelScope.launch(exceptionHandler) {
-            when {
-                count == 0 -> showSnackBar(R.string.enter_number)
-                count < 0 -> showSnackBar(R.string.enter_positive_number)
-                else -> {
-                    showLoader(true)
-                    val pointList = getPointsInteractor.getPoints(count)
-                        .toPointList()
-                        .sortedBy { point -> point.x }
-                    points.postValue(pointList)
-                    _navigateToGraphScreen.postValue(Event(Unit))
-                    showLoader(false)
+            withContext(Dispatchers.IO) {
+                when {
+                    count == 0 -> showSnackBar(R.string.enter_number)
+                    count < 0 -> showSnackBar(R.string.enter_positive_number)
+                    else -> {
+                        showLoader(true)
+                        val pointList = getPointsInteractor.getPoints(count)
+                            .toPointList()
+                            .sortedBy { point -> point.x }
+                        points.postValue(pointList)
+                        _navigateToGraphScreen.postValue(Event(Unit))
+                        showLoader(false)
+                    }
                 }
             }
         }

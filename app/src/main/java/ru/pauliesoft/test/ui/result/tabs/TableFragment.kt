@@ -10,6 +10,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
+import ru.pauliesoft.test.R
 import ru.pauliesoft.test.databinding.FragmentTableBinding
 import ru.pauliesoft.test.ui.MainViewModel
 import ru.pauliesoft.test.ui.base.BaseFragment
@@ -23,9 +24,10 @@ class TableFragment : BaseFragment() {
 
     companion object {
         private const val DEFAULT_PADDING = 20
-        private const val X_NAME = "Координата X"
-        private const val Y_NAME = "Координата Y"
     }
+
+    private val xName = getString(R.string.x_axis)
+    private val yName = getString(R.string.y_axis)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -45,7 +47,7 @@ class TableFragment : BaseFragment() {
     }
 
     private fun drawTable(points: List<Point>) {
-        binding.tableLayout.addView(createTableRow(X_NAME, Y_NAME))
+        binding.tableLayout.addView(createTableRow(xName, yName))
         for (point in points) {
             binding.tableLayout.addView(createTableRow(point.x.toString(), point.y.toString()))
         }

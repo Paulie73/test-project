@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import ru.pauliesoft.test.R
 import ru.pauliesoft.test.ui.livedata_wrapper.Event
 
 open class BaseViewModel : ViewModel() {
@@ -21,7 +22,7 @@ open class BaseViewModel : ViewModel() {
     open var exceptionHandlerBlock = {}
 
     val exceptionHandler = CoroutineExceptionHandler { _, exception ->
-        showSnackBar(exception.message.toString())
+        showSnackBar(R.string.exception_description)
         showLoader(false)
         exceptionHandlerBlock()
     }
