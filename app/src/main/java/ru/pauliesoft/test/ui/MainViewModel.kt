@@ -1,5 +1,6 @@
 package ru.pauliesoft.test.ui
 
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.pauliesoft.test.R
 import ru.pauliesoft.test.domain.GetPointsInteractor
+import ru.pauliesoft.test.domain.SaveFileInteractor
 import ru.pauliesoft.test.ui.base.BaseViewModel
 import ru.pauliesoft.test.ui.livedata_wrapper.Event
 import ru.pauliesoft.test.ui.mappers.Point
@@ -18,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getPointsInteractor: GetPointsInteractor
+    private val getPointsInteractor: GetPointsInteractor,
+    private val saveFileInteractor: SaveFileInteractor
 ) : BaseViewModel() {
 
     private val _navigateToGraphScreen = MutableLiveData<Event<Unit>>()
@@ -53,6 +56,18 @@ class MainViewModel @Inject constructor(
                         points.postValue(pointList)
                         showLoader(false)
                     }
+                }
+            }
+        }
+    }
+
+    fun onSaveFileButtonClicked(bitmap: Bitmap) {
+        viewModelScope.launch(exceptionHandler) {
+            saveFileInteractor.saveFile(bitmap).let { result ->
+                if (result) {
+                    showSnackBar(R.string.file_saved)
+                } else {
+                    showSnackBar(R.string.file_not_saved)
                 }
             }
         }
