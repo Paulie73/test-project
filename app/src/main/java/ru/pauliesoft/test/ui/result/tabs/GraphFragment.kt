@@ -1,5 +1,6 @@
 package ru.pauliesoft.test.ui.result.tabs
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import dagger.hilt.android.AndroidEntryPoint
 import ru.pauliesoft.test.databinding.FragmentGraphBinding
 import ru.pauliesoft.test.ui.MainViewModel
+import ru.pauliesoft.test.ui.base.BaseActivity
 import ru.pauliesoft.test.ui.base.BaseFragment
 import ru.pauliesoft.test.ui.mappers.Point
 
@@ -32,7 +34,19 @@ class GraphFragment : BaseFragment() {
         binding.radioButtonStraight.setOnClickListener { viewModel.isGraphSmooth.postValue(false) }
         binding.radioButtonSmooth.setOnClickListener { viewModel.isGraphSmooth.postValue(true) }
         binding.saveToFileButton.setOnClickListener {
-            viewModel.onSaveFileButtonClicked(binding.lineChart.chartBitmap)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                viewModel.onSaveFileButtonClicked(
+                    binding.lineChart.chartBitmap
+                )
+            } else {
+                (activity as? BaseActivity)?.let { baseActivity ->
+                    baseActivity.requestWriteExternalStoragePermission {
+                        viewModel.onSaveFileButtonClicked(
+                            binding.lineChart.chartBitmap
+                        )
+                    }
+                }
+            }
         }
     }
 

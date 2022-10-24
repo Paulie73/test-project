@@ -1,11 +1,15 @@
 package ru.pauliesoft.test.ui.base
 
+import android.Manifest
 import android.animation.ValueAnimator
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import ru.pauliesoft.test.showSnackBar
 import ru.pauliesoft.test.ui.livedata_wrapper.EventObserver
@@ -21,6 +25,12 @@ abstract class BaseActivity : AppCompatActivity() {
     private var loaderLayout: View? = null
 
     open var onBackPressedBlock: () -> Unit = {}
+
+    private var writeStoragePermissionGrantedBlock: () -> Unit = {}
+
+    companion object {
+        private const val WRITE_EXT_STORAGE_PERMISSION_SUCCESS_CODE = 100
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +90,35 @@ abstract class BaseActivity : AppCompatActivity() {
             }
             loaderVisibilityAnimator?.duration = 200
             loaderVisibilityAnimator?.start()
+        }
+    }
+
+    fun requestWriteExternalStoragePermission(writeStoragePermissionGrantedBlock: () -> Unit) {
+        this.writeStoragePermissionGrantedBlock = writeStoragePermissionGrantedBlock
+        if (ContextCompat.checkSelfPermission(
+                this, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            writeStoragePermissionGrantedBlock()
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                WRITE_EXT_STORAGE_PERMISSION_SUCCESS_CODE
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            WRITE_EXT_STORAGE_PERMISSION_SUCCESS_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    writeStoragePermissionGrantedBlock()
+                }
+            }
         }
     }
 }
