@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.pauliesoft.test.R
@@ -46,8 +47,10 @@ class MainViewModel @Inject constructor(
                         val pointList = getPointsInteractor.getPoints(count)
                             .toPointList()
                             .sortedBy { point -> point.x }
-                        points.postValue(pointList)
+                        points.postValue(emptyList())
                         _navigateToGraphScreen.postValue(Event(Unit))
+                        delay(500)
+                        points.postValue(pointList)
                         showLoader(false)
                     }
                 }

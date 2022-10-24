@@ -15,7 +15,7 @@
         app:navGraph="@navigation/main_navigation" />
 
     <include
-        android:id="@+id/loaderLayout"
+        android:id="@+id/loader_layout"
         layout="@layout/include_loader"
         android:visibility="gone" />
 

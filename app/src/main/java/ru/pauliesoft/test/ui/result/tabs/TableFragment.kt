@@ -26,9 +26,6 @@ class TableFragment : BaseFragment() {
         private const val DEFAULT_PADDING = 20
     }
 
-    private val xName = getString(R.string.x_axis)
-    private val yName = getString(R.string.y_axis)
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -47,7 +44,13 @@ class TableFragment : BaseFragment() {
     }
 
     private fun drawTable(points: List<Point>) {
-        binding.tableLayout.addView(createTableRow(xName, yName))
+        binding.tableLayout.removeAllViews()
+        binding.tableLayout.addView(
+            createTableRow(
+                getString(R.string.x_axis),
+                getString(R.string.y_axis)
+            )
+        )
         for (point in points) {
             binding.tableLayout.addView(createTableRow(point.x.toString(), point.y.toString()))
         }

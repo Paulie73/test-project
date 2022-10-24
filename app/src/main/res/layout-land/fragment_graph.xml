@@ -28,7 +28,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButtonStraight"
+                android:id="@+id/radio_button_straight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -36,7 +36,7 @@
                 android:textColor="@color/black" />
 
             <RadioButton
-                android:id="@+id/radioButtonSmooth"
+                android:id="@+id/radio_button_smooth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/type_smooth"
@@ -45,7 +45,7 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/saveToFileButton"
+            android:id="@+id/save_to_file_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -55,7 +55,7 @@
     </LinearLayout>
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lineChart"
+        android:id="@+id/line_chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp" />

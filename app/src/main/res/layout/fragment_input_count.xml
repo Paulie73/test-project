@@ -16,7 +16,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/countEditText"
+        android:id="@+id/count_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
@@ -26,7 +26,7 @@
         android:theme="@style/EditText" />
 
     <Button
-        android:id="@+id/goButton"
+        android:id="@+id/go_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="32dp"
